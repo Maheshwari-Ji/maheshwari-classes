@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All batches</title>
+    <link href="/css/login.css" rel="stylesheet" type="text/css" />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div th:replace="navbar::navbar-student"></div>
+    <div class="container h-100">
+      <div class="d-flex justify-content-center h-100">
+        <div class="user_card text-center">
+          <a class="btn btn-info" th:href="@{/student/batches/enrolled/}"
+            >View Enrolled Batches</a
+          >
+          <br />
+          <br />
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th>Batch Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Duration(in days)</th>
+                <th>Enroll</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="batch:${allBatches}">
+                <td th:text="${batch.batchName}"></td>
+                <td th:text="${batch.startDate}"></td>
+                <td th:text="${batch.endDate}"></td>
+                <td th:text="${batch.duration}"></td>
+                <td>
+                  <a
+                    class="btn btn-info"
+                    th:href="@{/student/batches/enroll/__${batch.id}__/}"
+                    th:if="${#lists.contains(enrolledBatchIds,__${batch.id}__) eq false}"
+                    >Enroll</a
+                  >
+                  <p
+                    th:if="${#lists.contains(enrolledBatchIds,__${batch.id}__)}"
+                  >
+                    Already Enrolled!
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Page</title>
+    <link href="/css/login.css" rel="stylesheet" type="text/css" />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div th:replace="navbar::navbar-student"></div>
+    <div class="container h-100">
+      <div class="d-flex justify-content-center h-100">
+        <div class="user_card text-center">
+          <div>
+            <input
+              type="text"
+              th:field="*{testName}"
+              placeholder="Name"
+              required
+            />
+            <form
+              method="post"
+              th:action="@{/student/tests/__${id}__/}"
+              th:object="${test}"
+            >
+              <div>
+                <label for="course">Course Name</label>
+                <p
+                  name="course"
+                  class="form-control"
+                  id="course"
+                  th:field="*{question}"
+                ></p>
+              </div>
+
+              <div>
+                <label for="question">Question</label>
+                <textarea
+                  th:field="*{question}"
+                  id="question"
+                  placeholder="Question"
+                  required
+                ></textarea>
+              </div>
+              <div>
+                <label for="date">Test Date</label>
+                <input
+                  type="date"
+                  th:field="*{testDate}"
+                  placeholder="Date"
+                  id="date"
+                  required
+                />
+              </div>
+              <div>
+                <label for="startTime">Start Time</label>
+                <input
+                  type="time"
+                  th:field="*{startTime}"
+                  placeholder="Start Time"
+                  required
+                />
+              </div>
+              <div>
+                <label for="duration">Duration</label>
+                <input
+                  type="number"
+                  th:field="*{duration}"
+                  placeholder="Duration"
+                  id="duration"
+                  required
+                />
+              </div>
+              <div>
+                <label for="maximumMarks">Maximum Marks</label>
+                <input
+                  type="number"
+                  th:field="*{maximumMarks}"
+                  placeholder="Maximum Marks"
+                  id="maximumMarks"
+                  required
+                />
+              </div>
+
+              <input type="submit" value="Add" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
